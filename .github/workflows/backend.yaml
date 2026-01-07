@@ -3,7 +3,7 @@ name: Deploy Backend
 on:
   push:
     branches:
-      - master  # trigger on push to master branch
+      - master # trigger on push to master branch
 
 jobs:
   deploy-backend:
@@ -18,6 +18,10 @@ jobs:
           key: ${{ secrets.ORACLE_VPS_KEY }}
           script: |
             echo "Deploying backend on VPS..."
+
+            # Load NVM so node & npm work
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  
 
             # go to backend folder
             cd ~/mern_deploy_test/backend
