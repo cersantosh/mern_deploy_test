@@ -5,7 +5,7 @@ function App() {
 
   return (
     <div>
-      <p>New changes haha</p>
+      <p>CI/CD Implemented</p>
       <Signup/>
     </div>
   )
