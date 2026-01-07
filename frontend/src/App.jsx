@@ -5,6 +5,7 @@ function App() {
 
   return (
     <div>
+      <p>New changes</p>
       <Signup/>
     </div>
   )
