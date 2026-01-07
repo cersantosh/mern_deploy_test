@@ -1,0 +1,37 @@
+name: Deploy Backend
+
+on:
+  push:
+    branches:
+      - master  # trigger on push to master branch
+
+jobs:
+  deploy-backend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: SSH to VPS and deploy backend
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.ORACLE_VPS_HOST }}
+          username: ${{ secrets.ORACLE_VPS_USER }}
+          key: ${{ secrets.ORACLE_VPS_KEY }}
+          script: |
+            echo "Deploying backend on VPS..."
+
+            # go to backend folder
+            cd ~/mern_deploy_test/backend
+
+            # discard local changes (optional, ensures clean pull)
+            git reset --hard HEAD
+
+            # pull latest code
+            git pull origin master
+
+            # install/update dependencies
+            npm install
+
+            # restart backend using pm2
+            pm2 restart mern-backend
+
+            echo "Backend deployment complete!"
