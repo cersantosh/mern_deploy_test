@@ -20,6 +20,10 @@ app.get("/api", (req, res) => {
   res.send("API is running...");
 });
 
+app.get("/api/health", (req, res) => {
+  res.send("Health api is running ...");
+});
+
 const PORT = process.env.PORT || 5000;
 
 await connectDB();
